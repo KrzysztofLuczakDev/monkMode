@@ -4,19 +4,7 @@ import Post from "./Post";
 import classes from "./PostList.module.css";
 import Modal from "./Modal";
 
-const PostLIst = ({isPosting, onStopPosting}) => {
-  const [enteredBody, setEnteredBody] = useState("");
-  const [enteredAuth, setEnteredAuth] = useState("");
-
-  const bodyChangeHandler = (event) => {
-    setEnteredBody(event.target.value);
-  };
-
-  const authorChangeHandler = (event) => {
-    setEnteredAuth(event.target.value);
-  };
-
-
+const PostLIst = ({ isPosting, onStopPosting }) => {
   // * three options to paste modal considering variable / state
 
   // ! First
@@ -60,24 +48,31 @@ if (modalIsVisible){
 {modalContent}
 */
 
+  const [posts, setPosts] = useState([]);
+
+  const addPostHandler = (postData) => {
+    setPosts((existingPosts) => [postData, ...existingPosts]);
+  };
   return (
     <>
       {isPosting && (
         <Modal onClose={onStopPosting}>
-          <NewPost
-            onBodyChange={bodyChangeHandler}
-            onAuthorChange={authorChangeHandler}
-            onCancel={onStopPosting}
-          />
+          <NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
         </Modal>
       )}
-      <ul className={classes.posts}>
-        <Post author={enteredAuth} body={enteredBody} />
-        <Post author={enteredAuth} body={enteredBody} />
-        <Post author={enteredAuth} body={enteredBody} />
-        <Post author={enteredAuth} body={enteredBody} />
-        <Post author={enteredAuth} body={enteredBody} />
-      </ul>
+
+      {posts.length > 0 ? (
+        <ul className={classes.posts}>
+          {posts.map((post) => (
+            <Post key={post.body} author={post.author} body={post.body} />
+          ))}
+        </ul>
+      ) : (
+        <div style={{ textAlign: "center", color: "white" }}>
+          <h2>There are no posts yet</h2>
+          <p>Start adding some!</p>
+        </div>
+      )}
     </>
   );
 };
