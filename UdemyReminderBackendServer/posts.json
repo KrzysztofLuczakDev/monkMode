@@ -1,9 +1,1 @@
-{
-  "posts": [
-    {
-      "body": "This course is hopefully very helpful to you!",
-      "author": "Maximilian",
-      "id": "post-1"
-    }
-  ]
-}
+{"posts":[{"body":"Let's see if react router 6 is awsome","author":"Chris","id":"0.930660408953488"},{"body":"React is awsome","author":"Jacob","id":"0.4531254796409345"},{"body":"This course is hopefully very helpful to you!","author":"Maximilian","id":"post-1"}]}
