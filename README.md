@@ -1,3 +1,3 @@
 # monkMode
 
-50 days of every day coding
+50 days of coding every day
